@@ -25,10 +25,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.css$/,
-        loaders: ['style', 'css'],
-        exclude: /node_modules/,
-        include: path.join(__dirname, 'app')
+        test: /\.css?$/,
+        loaders: ['style', 'raw'],
+        include: __dirname
       },
       {
         test: /\.jsx?$/,

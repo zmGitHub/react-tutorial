@@ -1,33 +1,16 @@
+import 'babel-polyfill'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './containers/App'
+import configureStore from './store/configureStore'
+import 'todomvc-app-css/index.css'
 
-import Counter from './components/Counter'
-import counter from './reducers/index'
+const store = configureStore()
 
-const store = createStore(counter)
-const EB = document.getElementById('root')
-
-let increment = function () {
-  store.dispatch({
-    type: 'INCREMENT'
-  })
-}
-
-let decrement = function () {
-  store.dispatch({
-    type: 'DECREMENT'
-  })
-}
-
-const renderDOM = function () {
-  ReactDOM.render(
-    <Counter
-      value={store.getState()}
-      onIncrement={increment}
-      onDecrement={decrement}
-    />, EB)
-}
-
-renderDOM()
-store.subscribe(renderDOM)
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)
